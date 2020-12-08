@@ -2,22 +2,13 @@
 <suite name="Multiplication And Division Tests">
     <test name="Div Test">
         <classes>
-            <class name="hw1.tests.DivisionTest">
-<!--                <methods>-->
-<!--                    <include name="Division Data Provider"/>-->
-<!--                    <include name="Divide By Zero"/>-->
-<!--                </methods>-->
-            </class>
+            <class name="hw1.tests.DivisionTest"> </class>
         </classes>
     </test>
 
     <test name="Multi Test">
         <classes>
-            <class name="hw1.tests.MultiplyTest">
-<!--                <methods>-->
-<!--                    <include name="Multiplication Data Provider"/>-->
-<!--                </methods>-->
-            </class>
+            <class name="hw1.tests.MultiplyTest"> </class>
         </classes>
     </test>
 </suite>

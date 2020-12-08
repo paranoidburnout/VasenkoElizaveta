@@ -2,21 +2,13 @@
 <suite name="Addition And Subtract Tests">
     <test name="Addition Test">
         <classes>
-            <class name="hw1.tests.AdditionTest">
-<!--                <methods>-->
-<!--                    <include name="Addition Data Provider"/>-->
-<!--                </methods>-->
-            </class>
+            <class name="hw1.tests.AdditionTest"> </class>
         </classes>
     </test>
 
     <test name="Subtract Test">
         <classes>
-            <class name="hw1.tests.SubtractTest">
-<!--                <methods>-->
-<!--                    <include name="Subtraction Data Provider"/>-->
-<!--                </methods>-->
-            </class>
+            <class name="hw1.tests.SubtractTest"> </class>
         </classes>
     </test>
 </suite>

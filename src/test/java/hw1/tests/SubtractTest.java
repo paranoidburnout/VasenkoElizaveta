@@ -9,8 +9,8 @@ public class SubtractTest extends AbstractTest {
 
     @Test(dataProvider = "Subtraction Data Provider",
             dataProviderClass = SubtractionDP.class)
-    public void subtractTest(int a, int b, int expectedResult) {
-        int actualResult = Math.toIntExact(calculator.sub(a, b));
+    public void subtractTest(long a, long b, long expectedResult) {
+        long actualResult = calculator.sub(a, b);
         assertEquals(actualResult, expectedResult);
     }
 }

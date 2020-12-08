@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class DivisionTest extends AbstractTest {
+
     @Test(dataProvider = "Division Data Provider",
             dataProviderClass = DivisionDP.class)
     public void divideTest(int a, int b, int expectedResult) {

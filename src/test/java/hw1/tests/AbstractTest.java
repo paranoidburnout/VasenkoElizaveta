@@ -4,7 +4,7 @@ import com.epam.tat.module4.Calculator;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
-public class AbstractTest {
+public abstract class AbstractTest {
 
     protected Calculator calculator;
 
