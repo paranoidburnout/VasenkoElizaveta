@@ -4,6 +4,7 @@ import hw2.base.BaseTest;
 import org.testng.annotations.Test;
 
 public class Exercise1 extends BaseTest {
+
     @Test
     public void testingExercise_1() {
         //1.Open test site by URL

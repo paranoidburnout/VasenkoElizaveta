@@ -1,6 +1,7 @@
 package hw2.base;
 
 public class Const {
+
     //names or titles
     public static final String titleExpected = "Home Page";
     public static final String login = "Roman";
@@ -15,6 +16,7 @@ public class Const {
             + "Service\n"
             + "Metals & Colors\n"
             + "Elements packs";
+
     //locators
     public static final String userIcon = "profile-photo";
     public static final String userLogin = "name";
