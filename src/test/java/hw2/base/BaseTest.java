@@ -1,5 +1,6 @@
 package hw2.base;
 
+import hw2.enums.LoginUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,13 +15,13 @@ import static hw2.base.Const.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class BaseTest {
+public abstract class BaseTest {
 
     protected WebDriver driver;
 
     @BeforeClass
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src\\test\\resources\\chromeDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
@@ -31,44 +32,41 @@ public class BaseTest {
     }
 
     //ex1 and ex2 common steps
-    protected void openURL() {
+    public void openURL() {
         driver.get(BASE_URL);
     }
 
-    public void assertTitle() {
+    public void assertTitle(String titleExpected) {
         assertEquals(driver.getTitle(), titleExpected);
     }
 
-    protected void performLogin() {
-        driver.findElement(By.className(userIcon)).click();
-        driver.findElement(By.id(userLogin)).sendKeys(login);
-        driver.findElement(By.cssSelector(userPassword)).sendKeys(password);
-        driver.findElement(By.id(enterButton)).click();
+    public void performLogin(LoginUser login) {
+        driver.findElement(By.className("profile-photo")).click();
+        driver.findElement(By.id("name")).sendKeys(login.getLogin());
+        driver.findElement(By.cssSelector("#password")).sendKeys(login.getPassword());
+        driver.findElement(By.id("login-button")).click();
     }
 
-    public void assertUserName() {
-        WebElement element = driver.findElement(By.xpath(userNameLocator));
+    public void assertUserName(LoginUser username) {
+        WebElement element = driver.findElement(By.xpath("//*[@class='profile-photo']//span"));
         assertTrue(element.isDisplayed());
-        assertEquals(element.getText(), userName);
+        assertEquals(element.getText(), username.getUsername());
     }
 
     //ex1 steps
-    public void assertItemsOnTheHeaderSection() {
-        WebElement items = driver.findElement(By.cssSelector(headerSection));
-        assertTrue(items.isDisplayed());
-        assertEquals(items.getText(), menuButtons);
+    public void assertItemsOnTheHeaderSection(WebElement assertionData, String expectedHeaders) {
+        assertTrue(assertionData.isDisplayed());
+        assertEquals(assertionData.getText(), expectedHeaders);
     }
 
-    public void checkImagesExistence() {
-        List<WebElement> images = driver.findElements(By.cssSelector(imagesOnHomePage));
+    public void checkImagesExistence(List<WebElement> images) {
         Assert.assertEquals(images.size(), 4);
         for (WebElement img : images) {
             Assert.assertTrue(img.isDisplayed());
         }
     }
 
-    public void checkTextBelowIcons() {
-        List<WebElement> texts = driver.findElements(By.className(textsOnHomePage));
+    public void checkTextBelowIcons(List<WebElement> texts) {
         assertEquals(texts.size(), 4);
         for (WebElement text : texts) {
             assertTrue(text.isDisplayed());
@@ -76,15 +74,15 @@ public class BaseTest {
     }
 
     public void assertFrameButton() {
-        WebElement frame = driver.findElement(By.id(buttonWithNameFrame));
+        WebElement frame = driver.findElement(By.id("frame"));
         boolean existedFrame = frame.isEnabled();
         Assert.assertTrue(existedFrame);
     }
 
     public void switchToTheFrameAndCheck() {
-        WebElement frame = driver.findElement(By.id(buttonWithNameFrame));
+        WebElement frame = driver.findElement(By.id("frame"));
         driver.switchTo().frame(frame);
-        WebElement iFrameButton = driver.findElement(By.id(buttonFrame));
+        WebElement iFrameButton = driver.findElement(By.id("button-frame"));
         assertTrue(iFrameButton.isDisplayed());
     }
 
@@ -92,55 +90,66 @@ public class BaseTest {
         driver.switchTo().defaultContent();
     }
 
-    public void assertItemsOnTheLeftSection() {
-        WebElement items = driver.findElement(By.cssSelector(leftSection));
-        assertTrue(items.isDisplayed());
-        assertEquals(items.getText(), menuButtonsOnTheLeft);
+    public void assertItemsOnTheLeftSection(WebElement assertionData, String expectedHeaders) {
+        assertTrue(assertionData.isDisplayed());
+        assertEquals(assertionData.getText(), expectedHeaders);
     }
 
     //ex2 steps
     public void openDifferentElementsPage() {
-        WebElement element = driver.findElement((By.xpath(pageService)));
+        WebElement element = driver.findElement((By.xpath("//a/span[contains(text(),'Service')]")));
         element.click();
-        driver.findElement((By.xpath(differentElementPage)));
+        driver.findElement((By.xpath("//a[contains(text(), 'Different elements')]")));
         element.click();
-        driver.get(URL_DIFF_ELEMENT_PAGES);
+        driver.get("https://jdi-testing.github.io/jdi-light/different-elements.html");
     }
 
-    public void selectWaterCheckbox() {
-        driver.findElement(By.cssSelector(water)).click();
+    public void selectWaterCheckbox(String input) {
+        driver.findElement(By.xpath(String.format("//*[@class = 'checkbox-row']/label[contains(., '%s')]", input))).click();
     }
 
-    public void selectWindCheckbox() {
-        driver.findElement(By.cssSelector(wind)).click();
+    public void selectWindCheckbox(String input) {
+        driver.findElement(By.xpath(String.format("//*[@class = 'checkbox-row']/label[contains(., '%s')]", input))).click();
     }
 
-    public void selectRadio() {
-        driver.findElement(By.xpath(selen)).click();
+    public void selectRadio(String input) {
+        driver.findElement(By.xpath(String.format("//*[@class = 'checkbox-row']/label[contains(., '%s')]", input))).click();
     }
 
-    public void selectDropdown() {
-        driver.findElement((By.xpath(uuiFormElement))).click();
-        driver.findElement((By.xpath(yellow))).click();
+    public void selectDropdown(String input) {
+        driver.findElement((By.xpath("//select[@class = 'uui-form-element']"))).click();
+        driver.findElement((By.xpath(String.format("//*[@class = 'uui-form-element']/option[contains(., '%s')]", input)))).click();
     }
 
-    public void assertCheckboxes() {
-        List<WebElement> logList = driver.findElements(By.cssSelector(panelBodyListLogs));
-        assertTrue(logList.get(2).getText().contains("Wind: condition changed to true"));
-        assertTrue(logList.get(3).getText().contains("Water: condition changed to true"));
+    public void assertCheckboxes(String checkbox, boolean status) {
+        Assert.assertTrue(status);
+        List<WebElement> list = driver.findElements(By.cssSelector("ul.panel-body-list.logs li"));
+        status = list
+                .stream()
+                .map(WebElement::getText)
+                .anyMatch(s -> s.contains(checkbox));
+
+        status = list
+                .stream()
+                .map(WebElement::getText)
+                .allMatch(s -> s.contains(checkbox));
+
     }
 
-    public void assertRadio() {
-        List<WebElement> logsList = driver.findElements(By.cssSelector(panelBodyListLogs));
-        assertTrue(logsList.get(1).getText().contains("metal: value changed to Selen"));
+    public void assertRadio(String radio, String typeValue) {
+        List<WebElement> list = driver.findElements(By.cssSelector("ul.panel-body-list.logs li"));
+        typeValue = String.valueOf(list
+                .stream()
+                .map(WebElement::getText)
+                .anyMatch(s -> s.contains(radio)));
     }
 
-    public void assertInDropdown() {
-        List<WebElement> logsList = driver.findElements(By.cssSelector(panelBodyListLogs));
-        assertTrue(logsList.get(0).getText().contains("Colors: value changed to Yellow"));
+    public void assertInDropdown(String dropdown, String typeValue) {
+        List<WebElement> list = driver.findElements(By.cssSelector("ul.panel-body-list.logs li"));
+        typeValue = String.valueOf(list
+                .stream()
+                .map(WebElement::getText)
+                .anyMatch(s -> s.contains(dropdown)));
     }
-
-    public static final String BASE_URL = "https://jdi-testing.github.io/jdi-light/index.html";
-    public static final String URL_DIFF_ELEMENT_PAGES = "https://jdi-testing.github.io/jdi-light/different-elements.html";
 }
 
