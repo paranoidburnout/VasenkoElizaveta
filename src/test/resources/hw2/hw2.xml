@@ -2,13 +2,13 @@
 <suite name="hw2">
     <test name="Exercise1">
         <classes>
-            <class name="hw2.ex1.ElementsOnTheHomePage"> </class>
+            <class name="hw2.ex1.ElementsOnTheHomePageTest"> </class>
         </classes>
     </test>
 
     <test name="Exercise2">
         <classes>
-            <class name="hw2.ex2.ElementsOnTheServicePage"> </class>
+            <class name="hw2.ex2.ElementsOnTheServicePageTest"> </class>
         </classes>
     </test>
 </suite>

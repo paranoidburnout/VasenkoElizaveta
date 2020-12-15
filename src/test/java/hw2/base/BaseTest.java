@@ -32,7 +32,7 @@ public abstract class BaseTest {
     }
 
     //ex1 and ex2 common steps
-    public void openURL() {
+    public void openHomePage() {
         driver.get(BASE_URL);
     }
 
@@ -79,7 +79,7 @@ public abstract class BaseTest {
         Assert.assertTrue(existedFrame);
     }
 
-    public void switchToTheFrameAndCheck() {
+    public void switchToTheFrameAndCheckFrameButtonInTheIframe() {
         WebElement frame = driver.findElement(By.id("frame"));
         driver.switchTo().frame(frame);
         WebElement iFrameButton = driver.findElement(By.id("button-frame"));
@@ -96,12 +96,11 @@ public abstract class BaseTest {
     }
 
     //ex2 steps
-    public void openDifferentElementsPage() {
+    public void openPagefromLeftMenuentsPage(String pageName) {
         WebElement element = driver.findElement((By.xpath("//a/span[contains(text(),'Service')]")));
         element.click();
-        driver.findElement((By.xpath("//a[contains(text(), 'Different elements')]")));
-        element.click();
-        driver.get("https://jdi-testing.github.io/jdi-light/different-elements.html");
+        WebElement differentElement = driver.findElement((By.xpath("//a/span[contains(text(), 'Different elements')]")));
+        differentElement.click();
     }
 
     public void selectWaterCheckbox(String input) {
@@ -121,35 +120,22 @@ public abstract class BaseTest {
         driver.findElement((By.xpath(String.format("//*[@class = 'uui-form-element']/option[contains(., '%s')]", input)))).click();
     }
 
-    public void assertCheckboxes(String checkbox, boolean status) {
-        Assert.assertTrue(status);
-        List<WebElement> list = driver.findElements(By.cssSelector("ul.panel-body-list.logs li"));
-        status = list
-                .stream()
-                .map(WebElement::getText)
-                .anyMatch(s -> s.contains(checkbox));
-
-        status = list
-                .stream()
-                .map(WebElement::getText)
-                .allMatch(s -> s.contains(checkbox));
-
+    public void assertCheckboxes(List<WebElement> logCheckbox) {
+        for (WebElement checkbox : logCheckbox) {
+            Assert.assertTrue(checkbox.isDisplayed());
+        }
     }
 
-    public void assertRadio(String radio, String typeValue) {
-        List<WebElement> list = driver.findElements(By.cssSelector("ul.panel-body-list.logs li"));
-        typeValue = String.valueOf(list
-                .stream()
-                .map(WebElement::getText)
-                .anyMatch(s -> s.contains(radio)));
+    public void assertRadio(List<WebElement> log) {
+        for (WebElement logRadio : log) {
+            Assert.assertTrue(logRadio.isDisplayed());
+        }
     }
 
-    public void assertInDropdown(String dropdown, String typeValue) {
-        List<WebElement> list = driver.findElements(By.cssSelector("ul.panel-body-list.logs li"));
-        typeValue = String.valueOf(list
-                .stream()
-                .map(WebElement::getText)
-                .anyMatch(s -> s.contains(dropdown)));
+    public void assertInDropdown(List<WebElement> panelWithLogs) {
+        for (WebElement logDropdrown : panelWithLogs) {
+            Assert.assertTrue(logDropdrown.isDisplayed());
+        }
     }
 }
 

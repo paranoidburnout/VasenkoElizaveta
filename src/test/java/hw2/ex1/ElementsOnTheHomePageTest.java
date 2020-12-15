@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class ElementsOnTheHomePage extends BaseTest {
+public class ElementsOnTheHomePageTest extends BaseTest {
 
     @Test
     public void thePresenceOfMainElementsOnTheHomePage() {
@@ -24,7 +24,7 @@ public class ElementsOnTheHomePage extends BaseTest {
                 + "Elements packs");
 
         //1.Open test site by URL
-        openURL();
+        openHomePage();
 
         //2.Assert Browser title
         assertTitle("Home Page");
@@ -51,7 +51,7 @@ public class ElementsOnTheHomePage extends BaseTest {
         assertFrameButton();
 
         //9.Switch to the iframe and check that there is “Frame Button” in the iframe
-        switchToTheFrameAndCheck();
+        switchToTheFrameAndCheckFrameButtonInTheIframe();
 
         //10.Switch to original window back
         switchToOriginalWindowBack();

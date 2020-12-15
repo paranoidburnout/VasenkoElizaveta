@@ -2,7 +2,7 @@ package hw2.enums;
 
 public enum LoginUser {
 
-    DEFAULT_USER("Roman","Jdi1234", "ROMAN IOVLEV");
+    DEFAULT_USER("Roman", "Jdi1234", "ROMAN IOVLEV");
 
     private String login;
     private String password;
@@ -25,6 +25,5 @@ public enum LoginUser {
     public String getUsername() {
         return username;
     }
-
 
 }
