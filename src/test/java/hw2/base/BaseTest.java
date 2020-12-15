@@ -99,7 +99,7 @@ public abstract class BaseTest {
     public void openPagefromLeftMenuentsPage(String pageName) {
         WebElement element = driver.findElement((By.xpath("//a/span[contains(text(),'Service')]")));
         element.click();
-        WebElement differentElement = driver.findElement((By.xpath("//a/span[contains(text(), 'Different elements')]")));
+        WebElement differentElement = driver.findElement(By.xpath(String.format("//a/span[contains(text(), '%s')]",pageName)));
         differentElement.click();
     }
 

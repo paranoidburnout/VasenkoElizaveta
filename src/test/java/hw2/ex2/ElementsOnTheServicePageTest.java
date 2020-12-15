@@ -26,7 +26,7 @@ public class ElementsOnTheServicePageTest extends BaseTest {
         assertUserName(LoginUser.DEFAULT_USER);
 
         //5.Open through the header menu Service -> Different Elements Page
-        openPagefromLeftMenuentsPage("Different elements page");
+        openPagefromLeftMenuentsPage("Different elements");
 
         //6.Select checkboxes
         selectWaterCheckbox("Water");
@@ -54,7 +54,7 @@ public class ElementsOnTheServicePageTest extends BaseTest {
         assertInDropdown(panelWithLogs);
     }
 
-    List<WebElement> getLogRowsByKeyWord(String word) {
+    private List<WebElement> getLogRowsByKeyWord(String word) {
         driver.findElements(By.xpath("//li[contains(text(),'" + word + "')]"));
 
         return driver.findElements(By.xpath("//li[contains(text(),'" + word + "')]"));
