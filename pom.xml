@@ -49,6 +49,16 @@
                 <suite.file>${project.basedir}/src/test/resources/hw1/PlayAllTests.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>hw2</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw2/hw2.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -58,12 +68,25 @@
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>com.epam.tat.module4</groupId>
             <artifactId>calculator</artifactId>
             <version>${calculator.version}</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/src/test/resources/external/calculator-1.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.2.0</version>
         </dependency>
 
     </dependencies>
