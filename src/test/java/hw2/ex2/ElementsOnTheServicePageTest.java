@@ -26,7 +26,7 @@ public class ElementsOnTheServicePageTest extends BaseTest {
         assertUserName(LoginUser.DEFAULT_USER);
 
         //5.Open through the header menu Service -> Different Elements Page
-        openPagefromLeftMenuentsPage("Different elements");
+        openPageFromLeftMenu("Different elements");
 
         //6.Select checkboxes
         selectWaterCheckbox("Water");
