@@ -1,14 +1,14 @@
 package hw3.pages;
 
+import hw3.base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
-public class ServicePage {
+public class ServicePage extends BaseTest {
 
     protected WebDriver driver;
 
@@ -38,50 +38,47 @@ public class ServicePage {
         this.driver = driver;
     }
 
-    public void clickServicePage() {
-        servicePage.click();
+    public WebElement getDifferentElementsPageMenuOption() {
+        return differentElementsPageMenuOption;
     }
 
-    public void clickDifferentElements() {
-        differentElementsPageMenuOption.click();
+    public WebElement getServicePage() {
+        return servicePage;
     }
 
-    public void clickCheckboxWater() {
-        checkboxWater.click();
+    public WebElement getCheckboxWater() {
+        return checkboxWater;
     }
 
-    public void clickCheckboxWind() {
-        checkboxWind.click();
+    public WebElement getCheckboxWind() {
+        return checkboxWind;
     }
 
-    public void clickRadioButtonSelen() {
-        radioButtonSelen.click();
+    public WebElement getRadioButtonSelen() {
+        return radioButtonSelen;
     }
 
-    public void selectYellowInDropDownMenu() {
-        Select colors = new Select(colorsDropDownMenu);
-        colors.selectByVisibleText("Yellow");
+    public WebElement getColorsDropDownMenu() {
+        return colorsDropDownMenu;
     }
 
     public List<WebElement> logWaterCheckbox() {
-        return getLogRowsByKeyWord("Water: condition changed to true");
+        return getLogsList("Water: condition changed to true");
     }
 
     public List<WebElement> logWindCheckbox() {
-        return getLogRowsByKeyWord("Wind: condition changed to true");
+        return getLogsList("Wind: condition changed to true");
     }
 
     public List<WebElement> log() {
-        return getLogRowsByKeyWord("metal: value changed to  Selen");
+        return getLogsList("metal: value changed to  Selen");
     }
 
     public List<WebElement> panelWithLogs() {
-        return getLogRowsByKeyWord("Colors: value changed to Yellow");
+        return getLogsList("Colors: value changed to Yellow");
     }
 
-
-    public static List<WebElement> getLogRowsByKeyWord(String word) {
+    public static List<WebElement> getLogsList(String word) {
         return logsList;
     }
-
 }

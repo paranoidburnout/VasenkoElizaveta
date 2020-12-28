@@ -1,20 +1,18 @@
 package hw3.pages;
 
+import hw3.base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 import static hw3.Const.BASE_URL;
 
-public class HomePage {
+public class HomePage extends BaseTest {
+
     protected WebDriver driver;
 
     @FindBy(className = "profile-photo")
@@ -62,7 +60,6 @@ public class HomePage {
     @FindBy(css = "ul.sidebar-menu")
     private WebElement itemsOnTheLeftSection;
 
-
     public HomePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -76,44 +73,44 @@ public class HomePage {
         assertEquals(driver.getTitle(), titleExpected);
     }
 
-    public void login() throws IOException {
-        InputStream input = new FileInputStream("src/test/resources/user.properties");
-        Properties prop = new Properties();
-        prop.load(input);
+    public void login(String login, String password) {
         dropdownForm.click();
-        loginForm.sendKeys(prop.getProperty("user.name"));
-        passwordForm.sendKeys(prop.getProperty("user.password"));
+        loginForm.sendKeys(login);
+        passwordForm.sendKeys(password);
         enterButton.click();
     }
 
-    public String getPageUserName() {
-        return user.getText();
+    public HomePage getPageUserName(String username) {
+        equalsText(user, username);
+        return this;
+    }
+
+    public WebElement getItemsOnTheHeader() {
+        return itemsOnTheHeader;
+    }
+
+    public WebElement getHomeMenuTab() {
+        return homeMenuTab;
+    }
+
+    public WebElement getContactFormMenuTab() {
+        return contactFormMenuTab;
+    }
+
+    public WebElement getServiceMenuTab() {
+        return serviceMenuTab;
+    }
+
+    public WebElement getMetalColorsMenuTab() {
+        return metalColorsMenuTab;
     }
 
     public List<WebElement> getImages() {
         return images;
     }
 
-    public List<WebElement> getTexts(){return texts;}
-
-    public boolean iframeExists() {
-        return frame != null;
-    }
-
-    public String getHomeMenuTabText() {
-        return homeMenuTab.getText();
-    }
-
-    public String getContactFormMenuTabText() {
-        return contactFormMenuTab.getText();
-    }
-
-    public String getServiceMenuTabText() {
-        return serviceMenuTab.getText();
-    }
-
-    public String getMetalColorsMenuTabText() {
-        return metalColorsMenuTab.getText();
+    public List<WebElement> getTexts() {
+        return texts;
     }
 
     public WebElement getFrame() {
@@ -124,11 +121,7 @@ public class HomePage {
         return buttonFrame;
     }
 
-    public Boolean isLeftSectionDisplayed() {
-        return itemsOnTheLeftSection.isDisplayed();
+    public WebElement getItemsOnTheLeftSection() {
+        return itemsOnTheLeftSection;
     }
-    public Boolean isHeaderSectionDisplayed(){
-        return itemsOnTheHeader.isDisplayed();
-    }
-
 }

@@ -4,49 +4,49 @@ import hw3.GeneralTests;
 import hw3.pages.ServicePage;
 import org.testng.annotations.Test;
 
-import static hw3.steps.HomePageSteps.*;
-import static hw3.steps.ServicePageSteps.*;
+import static hw3.Const.*;
 
-
-import java.io.IOException;
 
 public class ServicePageTest extends GeneralTests {
+
     protected ServicePage servicePage;
 
     @Test
-    public void presenceElementsOnTheServicePageDisplayed() throws IOException {
+    public void presenceElementsOnTheServicePageDisplayed() {
+
         servicePage = new ServicePage(driver);
+
         // 2. Assert Browser title
         homePage.assertTitle("Home Page");
 
         // 3. Perform login
-        performLogin(homePage);
+        homePage.login(login, password);
 
         //4.Assert Username is loggined
-        checkPageUserName(homePage);
+        homePage.getPageUserName(username);
 
         //5.Open through the header menu Service -> Different Elements Page
-        openDifferentElementsPage(servicePage);
+        servicePage.openDifferentElementsPage(servicePage.getServicePage(),servicePage.getDifferentElementsPageMenuOption());
 
         //6.Select checkboxes
-        selectWaterCheckbox(servicePage);
-        selectWindCheckbox(servicePage);
+        servicePage.selectWaterCheckbox(servicePage.getCheckboxWater());
+        servicePage.selectWindCheckbox(servicePage.getCheckboxWind());
 
         //7.Select radio
-        selectRadio(servicePage);
+        servicePage.selectRadio(servicePage.getRadioButtonSelen());
 
         //8.Select in dropdown
-        servicePage.selectYellowInDropDownMenu();
+        servicePage.selectYellowInDropDownMenu(servicePage.getColorsDropDownMenu());
 
         //9.Assert that for each checkbox there is an individual log row and value is corresponded to the
         //status of checkbox
-        assertCheckboxes(servicePage);
+        servicePage.assertCheckboxes(servicePage.logWaterCheckbox());
+        servicePage.assertCheckboxes(servicePage.logWindCheckbox());
 
         //9.Assert that for radio button there is a log row and value is corresponded to the status of radio button
-        assertRadio(servicePage);
+        servicePage.assertRadio(servicePage.log());
 
         //9.Assert that for dropdown there is a log row and value is corresponded to the selected value
-        assertInDropdown(servicePage);
+        servicePage.assertInDropdown(servicePage.panelWithLogs());
     }
-
 }
