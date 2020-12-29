@@ -5,4 +5,4 @@ public class Const {
     public final static String login = Utils.getProperty("login");
     public final static String password = Utils.getProperty("password");
     public final static String username = Utils.getProperty("username");
-   }
+}

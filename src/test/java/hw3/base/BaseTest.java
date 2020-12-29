@@ -1,19 +1,53 @@
 package hw3.base;
 
+import hw3.Const;
+import hw3.pages.HomePage;
+import hw3.pages.ServicePage;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import java.util.List;
 
+import static hw3.Const.BASE_URL;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public abstract class BaseTest {
 
-    public void equalsText(WebElement element, String expectedText) {
-        String actualText = element.getText();
-        Assert.assertEquals(actualText, expectedText);
+    protected WebDriver driver;
+    protected HomePage homePage;
+    protected ServicePage servicePage;
+
+    @BeforeClass
+    public void setUp() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        homePage = new HomePage(driver);
+        servicePage = new ServicePage(driver);
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.close();
+    }
+
+    public void openHomePage() {
+        driver.navigate().to(BASE_URL);
+    }
+
+    public void assertTitle(String titleExpected) {
+        assertEquals(driver.getTitle(), titleExpected);
+    }
+
+    public void getPageUserName(WebElement user, String username) {
+        assertEquals(user.getText(), Const.username);
     }
 
     //ex1

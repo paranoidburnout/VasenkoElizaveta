@@ -1,14 +1,12 @@
 package hw3.pages;
 
-import hw3.base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class ServicePage extends BaseTest {
+public class ServicePage extends BasePage {
 
     protected WebDriver driver;
 
@@ -34,8 +32,7 @@ public class ServicePage extends BaseTest {
     private WebElement colorsDropDownMenu;
 
     public ServicePage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
+        super(driver);
     }
 
     public WebElement getDifferentElementsPageMenuOption() {

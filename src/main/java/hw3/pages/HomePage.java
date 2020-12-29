@@ -1,17 +1,12 @@
 package hw3.pages;
 
-import hw3.base.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static hw3.Const.BASE_URL;
-
-public class HomePage extends BaseTest {
+public class HomePage extends BasePage {
 
     protected WebDriver driver;
 
@@ -61,16 +56,7 @@ public class HomePage extends BaseTest {
     private WebElement itemsOnTheLeftSection;
 
     public HomePage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
-
-    public void openHomePage() {
-        driver.navigate().to(BASE_URL);
-    }
-
-    public void assertTitle(String titleExpected) {
-        assertEquals(driver.getTitle(), titleExpected);
+        super(driver);
     }
 
     public void login(String login, String password) {
@@ -80,10 +66,7 @@ public class HomePage extends BaseTest {
         enterButton.click();
     }
 
-    public HomePage getPageUserName(String username) {
-        equalsText(user, username);
-        return this;
-    }
+    public WebElement getUser() { return user; }
 
     public WebElement getItemsOnTheHeader() {
         return itemsOnTheHeader;
@@ -113,9 +96,7 @@ public class HomePage extends BaseTest {
         return texts;
     }
 
-    public WebElement getFrame() {
-        return frame;
-    }
+    public WebElement getFrame() { return frame; }
 
     public WebElement getButtonFrame() {
         return buttonFrame;
