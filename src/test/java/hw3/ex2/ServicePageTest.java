@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import static hw3.Const.*;
 
-
 public class ServicePageTest extends GeneralTests {
 
     protected ServicePage servicePage;
@@ -26,7 +25,7 @@ public class ServicePageTest extends GeneralTests {
         homePage.getPageUserName(username);
 
         //5.Open through the header menu Service -> Different Elements Page
-        servicePage.openDifferentElementsPage(servicePage.getServicePage(),servicePage.getDifferentElementsPageMenuOption());
+        servicePage.openDifferentElementsPage(servicePage.getServicePage(), servicePage.getDifferentElementsPageMenuOption());
 
         //6.Select checkboxes
         servicePage.selectWaterCheckbox(servicePage.getCheckboxWater());

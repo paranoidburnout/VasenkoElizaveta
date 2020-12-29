@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import static hw3.Const.*;
 
-
 public class HomePageTests extends GeneralTests {
 
     protected String mainWindowHandle;
