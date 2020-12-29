@@ -8,8 +8,6 @@ import java.util.List;
 
 public class HomePage extends BasePage {
 
-    protected WebDriver driver;
-
     @FindBy(className = "profile-photo")
     private WebElement dropdownForm;
 
@@ -66,7 +64,9 @@ public class HomePage extends BasePage {
         enterButton.click();
     }
 
-    public WebElement getUser() { return user; }
+    public WebElement getUser() {
+        return user;
+    }
 
     public WebElement getItemsOnTheHeader() {
         return itemsOnTheHeader;
@@ -96,7 +96,9 @@ public class HomePage extends BasePage {
         return texts;
     }
 
-    public WebElement getFrame() { return frame; }
+    public WebElement getFrame() {
+        return frame;
+    }
 
     public WebElement getButtonFrame() {
         return buttonFrame;

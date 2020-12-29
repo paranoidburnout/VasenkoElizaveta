@@ -8,8 +8,6 @@ import java.util.List;
 
 public class ServicePage extends BasePage {
 
-    protected WebDriver driver;
-
     @FindBy(xpath = "//a/span[contains(text(),'Different elements')]")
     private WebElement differentElementsPageMenuOption;
 
