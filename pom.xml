@@ -69,6 +69,16 @@
                 <suite.file>${project.basedir}/src/test/resources/hw3/hw3.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>hw4</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw4/hw4.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -76,6 +86,13 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.13.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -103,6 +120,11 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
