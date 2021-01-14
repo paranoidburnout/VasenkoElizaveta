@@ -38,6 +38,14 @@ public class AssertionStep extends BaseStep {
         Assert.assertEquals(homePage.getMetalColorsMenuTab().getText(), "METALS & COLORS");
     }
 
+    @Step("4 items on the header section have proper texts")
+    public void itemsOnTheHeaderHaveTexts() {
+        Assert.assertEquals(homePage.getHomeMenuTab().getText(), "CONTACT FORM");
+        Assert.assertEquals(homePage.getContactFormMenuTab().getText(), "SERVICE");
+        Assert.assertEquals(homePage.getServiceMenuTab().getText(), "METALS & COLORS");
+        Assert.assertEquals(homePage.getMetalColorsMenuTab().getText(), "HOME");
+    }
+
     @Step("Assert that there are 4 images on the Index Page and they are displayed")
     public void verifyImagesOnTheHomePageAreDisplayed() {
         Assert.assertEquals(homePage.getImages().size(), 4);
@@ -58,6 +66,11 @@ public class AssertionStep extends BaseStep {
     public void assertFrameExist() {
         Assert.assertTrue(homePage.getFrame().isDisplayed());
     }
+
+//    @Step("Assert that there is the iframe with “Frame Button” exist")
+//    public void assertIFrameExist() {
+//        Assert.assertFalse(homePage.getFrame().isDisplayed());
+//    }
 
     @Step("Check that there is “Frame Button” in the iframe")
     public void assertFrameButtonExist() {

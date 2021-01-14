@@ -1,4 +1,4 @@
-package hw4.tests.ex1;
+package hw4.tests.ex2;
 
 import hw4.tests.base.BaseTest;
 import io.qameta.allure.Feature;
@@ -7,16 +7,16 @@ import org.testng.annotations.Test;
 
 @Feature("Check Home page")
 @Story("All steps for check")
-public class HomePageTests extends BaseTest {
+public class FailTest extends BaseTest {
 
-    @Test(description = "Home page testing")
-    public void thePresenceOfMainElementsOnTheHomePage() {
+    @Test(description = "Home page testing, but this need fail")
+    public void theFailPresenceOfMainElementsOnTheHomePage() {
         actionStep.openHomePage();
         assertionStep.assertTitle();
         actionStep.loggIn();
         assertionStep.assertUsername();
         assertionStep.assertItemsOnTheHeaderAreDisplayed();
-        assertionStep.assertItemsOnTheHeaderHaveTexts();
+        assertionStep.itemsOnTheHeaderHaveTexts();
         assertionStep.verifyImagesOnTheHomePageAreDisplayed();
         assertionStep.assertImagesOnTheHeaderHaveTexts();
         assertionStep.assertFrameExist();

@@ -8,12 +8,13 @@
     <test name="Exercise1">
         <classes>
             <class name="hw4.tests.ex1.HomePageTests"> </class>
+            <class name="hw4.tests.ex1.ServicePageTest"> </class>
         </classes>
     </test>
 
     <test name="Exercise2">
         <classes>
-            <class name="hw4.tests.ex2.ServicePageTest"> </class>
+            <class name="hw4.tests.ex2.FailTest"> </class>
         </classes>
     </test>
 </suite>
