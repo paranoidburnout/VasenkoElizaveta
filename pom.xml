@@ -23,7 +23,7 @@
         <profile>
             <id>AdditionAndSubtractTests</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.file>src/test/resources/hw1/AddAndSubtTest.xml</suite.file>
@@ -73,7 +73,7 @@
         <profile>
             <id>hw4</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw4/hw4.xml</suite.file>
