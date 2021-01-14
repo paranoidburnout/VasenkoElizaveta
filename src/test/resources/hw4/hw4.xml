@@ -7,14 +7,17 @@
 
     <test name="Exercise1">
         <classes>
-            <class name="hw4.tests.ex1.HomePageTests"> </class>
-            <class name="hw4.tests.ex1.ServicePageTest"> </class>
+            <class name="hw4.tests.ex1.HomePageTests"/>
         </classes>
     </test>
-
     <test name="Exercise2">
         <classes>
-            <class name="hw4.tests.ex2.FailTest"> </class>
+            <class name="hw4.tests.ex1.ServicePageTest"/>
+        </classes>
+    </test>
+    <test name="test for fail">
+        <classes>
+            <class name="hw4.tests.ex2.FailTest"/>
         </classes>
     </test>
 </suite>
