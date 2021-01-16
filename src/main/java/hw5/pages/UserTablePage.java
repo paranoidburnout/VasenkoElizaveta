@@ -1,12 +1,18 @@
 package hw5.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserTablePage extends BasePage {
+
+    @FindBy(css = "tbody")
+    private WebElement body;
 
     @FindBy(xpath = "//a[contains(. ,'Service')]")
     private WebElement servicePageOnTop;
@@ -29,6 +35,10 @@ public class UserTablePage extends BasePage {
     @FindBy(id = "ivan")
     private WebElement dropdownValues;
 
+
+    @FindBy(xpath = "//tbody//tr//td[2]//select")
+    private List<WebElement> dropdowns;
+
     @FindBy(xpath = "//li[contains(text(), '%s')]")
     private static List<WebElement> logsList;
 
@@ -36,8 +46,28 @@ public class UserTablePage extends BasePage {
         super(driver);
     }
 
+    public List<WebElement> getNumberTypeDropdowns() {
+        return numberTypeDropdowns;
+    }
+
+    public List<WebElement> getUsernames() {
+        return usernames;
+    }
+
+    public List<WebElement> getDescriptionTextsUnderImages() {
+        return descriptionTextsUnderImages;
+    }
+
+    public List<WebElement> getCheckboxes() {
+        return checkboxes;
+    }
+
     public WebElement getDropdownValues() {
         return dropdownValues;
+    }
+
+    public List<WebElement> getDropdown() {
+        return dropdowns;
     }
 
     public void selectVipCheckbox() {
@@ -47,6 +77,32 @@ public class UserTablePage extends BasePage {
     public void openUserTable() {
         servicePageOnTop.click();
         userTableButton.click();
+    }
+
+    public List<String> getNumbersValues() {
+        return body.findElements(By.xpath("//td[1]")).stream()
+                .map(p -> p.getText())
+                .map(p -> p.trim())
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getDescriptionOfUser() {
+        return body.findElements(By.tagName("span")).stream()
+                .map(p -> p.getText())
+                .map(p -> p.trim())
+                .map(p -> p.replaceAll("\\s", " "))
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getUserNamesText() {
+        return getUsernames().stream()
+                .map(p -> p.getText())
+                .map(p -> p.trim())
+                .collect(Collectors.toList());
+    }
+
+    public List<WebElement> getValuesOfDropdown() {
+        return new Select(getDropdown().get(0)).getOptions();
     }
 
     public static List<WebElement> getLogsList(String word, String text) {
