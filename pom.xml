@@ -80,6 +80,16 @@
                 <suite.file>${project.basedir}/src/test/resources/hw4/hw4.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>hw5</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw5/hw5.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -116,7 +126,25 @@
             <artifactId>webdrivermanager</artifactId>
             <version>4.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>6.7.0</version>
+            <scope>test</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>6.7.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>6.7.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
