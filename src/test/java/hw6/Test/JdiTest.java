@@ -18,7 +18,7 @@ public class JdiTest {
     @BeforeSuite
     public void beforeSuite() {
         PageFactory.initSite(JdiSite.class);
-        steps= new JdiSteps();
+        steps = new JdiSteps();
     }
 
     @AfterSuite

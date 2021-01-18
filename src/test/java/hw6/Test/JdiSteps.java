@@ -26,7 +26,7 @@ public class JdiSteps {
         String actualUserName = JdiSite.homePage.getUserName();
         Assert.assertEquals(actualUserName, ROMAN.getFullName(),
                 format(String.valueOf(ROMAN), actualUserName));
-        Assert.assertEquals(user.getFullName(),"ROMAN IOVLEV" );
+        Assert.assertEquals(user.getFullName(), "ROMAN IOVLEV");
     }
 
     public void clickHeaderMenu(HeaderMenuItems metalsAndColors) {
