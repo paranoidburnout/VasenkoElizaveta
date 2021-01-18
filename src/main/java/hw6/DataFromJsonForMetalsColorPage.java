@@ -5,7 +5,7 @@ import hw6.entities.Summary;
 import java.util.List;
 import java.util.Objects;
 
-public class DataProviderJsonForMetalsColorPage {
+public class DataFromJsonForMetalsColorPage {
 
     private List<Integer> summary;
     private List<String> elements;
@@ -61,7 +61,7 @@ public class DataProviderJsonForMetalsColorPage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DataProviderJsonForMetalsColorPage that = (DataProviderJsonForMetalsColorPage) o;
+        DataFromJsonForMetalsColorPage that = (DataFromJsonForMetalsColorPage) o;
         return Objects.equals(elements, that.elements) &&
                 Objects.equals(color, that.color) &&
                 Objects.equals(metals, that.metals) &&

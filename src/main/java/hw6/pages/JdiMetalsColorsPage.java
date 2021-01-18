@@ -3,7 +3,7 @@ package hw6.pages;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
-import hw6.DataProviderJsonForMetalsColorPage;
+import hw6.DataFromJsonForMetalsColorPage;
 import hw6.entities.Summary;
 import hw6.forms.SummaryForm;
 import org.openqa.selenium.By;
@@ -54,7 +54,7 @@ public class JdiMetalsColorsPage extends WebPage {
         return log;
     }
 
-    public void fill(DataProviderJsonForMetalsColorPage data) {
+    public void fill(DataFromJsonForMetalsColorPage data) {
         setSummary(data.getSummary());
         setVegetables(data.getVegetables());
         setColors(data.getColor());
