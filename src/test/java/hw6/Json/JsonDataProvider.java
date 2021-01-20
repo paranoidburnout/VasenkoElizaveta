@@ -2,7 +2,7 @@ package hw6.Json;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import hw6.DataFromJsonForMetalsColorPage;
+import hw6.entities.MetalsAndColors;
 import org.testng.annotations.DataProvider;
 
 import java.io.FileNotFoundException;
@@ -14,8 +14,8 @@ public class JsonDataProvider {
     @DataProvider(name = "DataProviderJson")
     public Object[][] divideDataProviderNoCheckDivZero() throws FileNotFoundException {
         Reader reader = new FileReader("src/test/resources/hw6/JDI_ex6_metalsColorsDataSet.json");
-        Map<String, DataFromJsonForMetalsColorPage> dataFromJson = new Gson()
-                .fromJson(reader, new TypeToken<Map<String, DataFromJsonForMetalsColorPage>>() {
+        Map<String, MetalsAndColors> dataFromJson = new Gson()
+                .fromJson(reader, new TypeToken<Map<String, MetalsAndColors>>() {
                 }
                         .getType());
         Object[][] returnObject = new Object[dataFromJson.size()][1];

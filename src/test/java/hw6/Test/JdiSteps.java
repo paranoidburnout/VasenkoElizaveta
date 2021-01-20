@@ -1,14 +1,12 @@
 package hw6.Test;
 
 import com.epam.jdi.light.elements.composite.WebPage;
-import hw6.DataFromJsonForMetalsColorPage;
 import hw6.JdiSite;
 import hw6.complexelements.HeaderMenuItems;
+import hw6.entities.MetalsAndColors;
 import hw6.entities.User;
 import org.testng.Assert;
 
-import static hw6.JdiSite.getTitle;
-import static hw6.JdiSite.metalsColorsPage;
 import static hw6.entities.User.ROMAN;
 import static java.lang.String.format;
 
@@ -21,7 +19,7 @@ public class JdiSteps {
         JdiSite.open();
     }
 
-    public void loginWasSuccessful(User user) {
+    public void login(User user) {
         JdiSite.login(ROMAN);
         String actualUserName = JdiSite.homePage.getUserName();
         Assert.assertEquals(actualUserName, ROMAN.getFullName(),
@@ -29,33 +27,26 @@ public class JdiSteps {
         Assert.assertEquals(user.getFullName(), "ROMAN IOVLEV");
     }
 
-    public void clickHeaderMenu(HeaderMenuItems metalsAndColors) {
-        JdiSite.clickItemOfHeaderMenu(metalsAndColors);
+    public void openMetalAndColorsPage(HeaderMenuItems metalsAndColors) {
+        JdiSite.openMetalsAndColorsPage(metalsAndColors);
     }
 
-    public void pageIsOpened(HeaderMenuItems metalsAndColors) {
-        metalsColorsPage.checkOpened();
-        Assert.assertEquals(getTitle(), "Metal and Colors", String.valueOf(metalsAndColors));
-    }
 
-    public void fillPageWithData(DataFromJsonForMetalsColorPage dataProviderJsonForMetalsColorPage) {
+    public void fillPageByMetalsAndColors(MetalsAndColors metalsAndColors) {
         WebPage.refresh();
-        JdiSite.metalsColorsPage.fill(dataProviderJsonForMetalsColorPage);
+        JdiSite.metalsColorsPage.fillMetalAndColorForm(metalsAndColors);
     }
 
-    public void submitForm() {
-        metalsColorsPage.submit();
-    }
 
-    public void resultShouldContainsData(DataFromJsonForMetalsColorPage dataJson) {
-        int expected = dataJson.getSumOfElementsSummary();
+    public void resultShouldContainsData(MetalsAndColors metalsAndColors) {
+        int expected = metalsAndColors.getSumOfElementsSummary();
         Assert.assertEquals(JdiSite.metalsColorsPage.getLog().getSummary(), Integer.valueOf(expected));
-        DataFromJsonForMetalsColorPage actualDataWithoutSummary = getObjectWithDataFromSite();
-        Assert.assertEquals(dataJson, actualDataWithoutSummary);
+        MetalsAndColors actualDataWithoutSummary = getObjectWithDataFromSite();
+        Assert.assertEquals(metalsAndColors, actualDataWithoutSummary);
     }
 
-    private DataFromJsonForMetalsColorPage getObjectWithDataFromSite() {
-        DataFromJsonForMetalsColorPage actualData = new DataFromJsonForMetalsColorPage();
+    private MetalsAndColors getObjectWithDataFromSite() {
+        MetalsAndColors actualData = new MetalsAndColors();
         actualData.setColor(JdiSite.metalsColorsPage.getLog().getColor());
         actualData.setElements(JdiSite.metalsColorsPage.getLog().getElements());
         actualData.setMetals(JdiSite.metalsColorsPage.getLog().getMetals());

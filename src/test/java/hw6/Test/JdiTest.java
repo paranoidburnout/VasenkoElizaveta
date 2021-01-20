@@ -2,10 +2,10 @@ package hw6.Test;
 
 import com.epam.jdi.light.driver.WebDriverUtils;
 import com.epam.jdi.light.elements.init.PageFactory;
-import hw6.DataFromJsonForMetalsColorPage;
 import hw6.JdiSite;
 import hw6.Json.JsonDataProvider;
 import hw6.complexelements.HeaderMenuItems;
+import hw6.entities.MetalsAndColors;
 import hw6.entities.User;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -27,23 +27,11 @@ public class JdiTest {
     }
 
     @Test(dataProvider = "DataProviderJson", dataProviderClass = JsonDataProvider.class)
-    public void jdiTest(DataFromJsonForMetalsColorPage dataProviderJsonForMetalsColorPage) {
-
-        //Login on JDI site as User
+    public void jdiTest(MetalsAndColors metalAndColor) {
         steps.openSite();
-        steps.loginWasSuccessful(User.ROMAN);
-
-        //Open Metals & Colors page by Header menu
-        steps.clickHeaderMenu(HeaderMenuItems.METALS_AND_COLORS);
-        steps.pageIsOpened(HeaderMenuItems.METALS_AND_COLORS);
-
-        //Fill form Metals & Colors by data below
-        steps.fillPageWithData(dataProviderJsonForMetalsColorPage);
-
-        //Submit form Metals & Colors
-        steps.submitForm();
-
-        //Result sections should contains data  below
-        steps.resultShouldContainsData(dataProviderJsonForMetalsColorPage);
+        steps.login(User.ROMAN);
+        steps.openMetalAndColorsPage(HeaderMenuItems.METALS_AND_COLORS);
+        steps.fillPageByMetalsAndColors(metalAndColor);
+        steps.resultShouldContainsData(metalAndColor);
     }
 }
