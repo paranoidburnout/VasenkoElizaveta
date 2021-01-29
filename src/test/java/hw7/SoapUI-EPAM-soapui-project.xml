@@ -197,7 +197,7 @@ if (count == PropertiesTestStep.getPropertyValue("Total").toInteger() - 1)
          <spel:text>${Properties#word_to_correct}</spel:text>\r
       </spel:CheckTextRequest>\r
    </soapenv:Body>\r
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b94b786-ccce-4d06-ac34-3c7d91883a4c"/><con:assertion type="Invalid HTTP Status Codes" id="0e8bf0fa-74ce-44b2-ad57-f93c6a12bc44" name="Invalid HTTP Status Codes"><con:configuration><codes>200 ok</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="afdbdd71-aecf-4abe-9050-7562ab920cdd" name="Script Assertion" disabled="true"><con:configuration><scriptText>def expected = context.expand('${Properties#expected_result}')
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="2b94b786-ccce-4d06-ac34-3c7d91883a4c"/><con:assertion type="Invalid HTTP Status Codes" id="0e8bf0fa-74ce-44b2-ad57-f93c6a12bc44" name="Invalid HTTP Status Codes"><con:configuration><codes>200 ok</codes></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="afdbdd71-aecf-4abe-9050-7562ab920cdd" name="Script Assertion"><con:configuration><scriptText>def expected = context.expand('${Properties#expected_result}')
 
 def xmlObjResp = new XmlSlurper().parseText(messageExchange.getResponseContent())
 
