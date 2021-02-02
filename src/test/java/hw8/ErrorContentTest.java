@@ -8,27 +8,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 
+import static hw8.TestData.*;
 import static java.util.Arrays.asList;
 
 public class ErrorContentTest {
-
-    private static final ParametersDto TEXT_WITH_UNKNOWN_LANGUAGE = new ParametersDto()
-            .setIncorrectText(Collections.singletonList("unavena"));
-
-    private static final String ERROR_IN_TEXT_WITH_OPTIONS = "думаю";
-
-    private static final ParametersDto TEXT_WITH_OPTIONS = new ParametersDto()
-            .setIncorrectText(Collections.singletonList("Я думаю думаю о смысле. Что есть я"))
-            .setOptions(526);
-
-    private static final ParametersDto TEXT_WITH_UPPERCASE = new ParametersDto()
-            .setIncorrectText(Collections.singletonList("АТЛанТиДА"))
-            .setCorrectText(Collections.singletonList("Атлантида"));
-
-    private static final ParametersDto TEXT_WITH_DIGITS = new ParametersDto()
-            .setIncorrectText(Collections.singletonList("Царь228"));
 
     @DataProvider
     public Object[] checkTextForSpellingErrorsDataProvider() {
@@ -53,26 +37,20 @@ public class ErrorContentTest {
     }
 
     @Test
-    public void checkOptions() {
-        SpellerDto[] spellerDto = new RestSpellerService()
-                .getCheckTextResult(TEXT_WITH_OPTIONS);
-        new RestSpellerAssertions(spellerDto)
-                .checkWordWithMistake(ERROR_IN_TEXT_WITH_OPTIONS);
-    }
-
-    @Test
     public void checkWordsInUppercase() {
-        SpellerDto[][] spellerDto = new RestSpellerService().getCheckTextsResult(TEXT_WITH_UPPERCASE);
-        SpellerDto[] errorDto = Arrays.stream(spellerDto).flatMap(Arrays::stream).toArray(SpellerDto[]::new);
-        new RestSpellerAssertions(errorDto)
-                .verifyBodyHasErrorCode(3)
-                .checkResponseContainsCorrectText(TEXT_WITH_UPPERCASE.getCorrectText());
+        checkText(TEXT_WITH_UPPERCASE, 3);
     }
 
     @Test
     public void checkTextForDigits() {
-        SpellerDto[][] spellerDto = new RestSpellerService().getCheckTextsResult(TEXT_WITH_DIGITS);
+        checkText(TEXT_WITH_DIGITS,1);
+    }
+
+    public void checkText(ParametersDto String, Integer error) {
+        SpellerDto[][] spellerDto = new RestSpellerService().getCheckTextsResult(String);
         SpellerDto[] errorDto = Arrays.stream(spellerDto).flatMap(Arrays::stream).toArray(SpellerDto[]::new);
-        new RestSpellerAssertions(errorDto).verifyBodyHasErrorCode(1);
+        new RestSpellerAssertions(errorDto)
+                .verifyBodyHasErrorCode(error)
+                .checkResponseContainsCorrectText(String.getCorrectText());
     }
 }
