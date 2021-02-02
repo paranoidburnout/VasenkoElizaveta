@@ -15,6 +15,11 @@ public class RestSpellerAssertions {
         this.spellerResponse = spellerResponse;
     }
 
+    public RestSpellerAssertions verifyBodyHasErrorCode(Integer errorCode) {
+        assertThat(spellerResponse[0]).extracting("code").isSameAs(errorCode);
+        return this;
+    }
+
     public void checkResponseContainsCorrectText(List<String> correctText) {
         assertThat(spellerResponse).flatExtracting(SpellerDto::getS).containsAll(correctText);
     }

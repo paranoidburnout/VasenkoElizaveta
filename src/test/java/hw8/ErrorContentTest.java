@@ -7,6 +7,7 @@ import hw8.service.RestSpellerService;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static java.util.Arrays.asList;
@@ -21,6 +22,13 @@ public class ErrorContentTest {
     private static final ParametersDto TEXT_WITH_OPTIONS = new ParametersDto()
             .setIncorrectText(Collections.singletonList("Я думаю думаю о смысле. Что есть я"))
             .setOptions(526);
+
+    private static final ParametersDto TEXT_WITH_UPPERCASE = new ParametersDto()
+            .setIncorrectText(Collections.singletonList("АТЛанТиДА"))
+            .setCorrectText(Collections.singletonList("Атлантида"));
+
+    private static final ParametersDto TEXT_WITH_DIGITS = new ParametersDto()
+            .setIncorrectText(Collections.singletonList("Царь228"));
 
     @DataProvider
     public Object[] checkTextForSpellingErrorsDataProvider() {
@@ -46,10 +54,25 @@ public class ErrorContentTest {
 
     @Test
     public void checkOptions() {
-        SpellerDto[] errors = new RestSpellerService()
+        SpellerDto[] spellerDto = new RestSpellerService()
                 .getCheckTextResult(TEXT_WITH_OPTIONS);
-        new RestSpellerAssertions(errors)
+        new RestSpellerAssertions(spellerDto)
                 .checkWordWithMistake(ERROR_IN_TEXT_WITH_OPTIONS);
     }
 
+    @Test
+    public void checkWordsInUppercase() {
+        SpellerDto[][] spellerDto = new RestSpellerService().getCheckTextsResult(TEXT_WITH_UPPERCASE);
+        SpellerDto[] errorDto = Arrays.stream(spellerDto).flatMap(Arrays::stream).toArray(SpellerDto[]::new);
+        new RestSpellerAssertions(errorDto)
+                .verifyBodyHasErrorCode(3)
+                .checkResponseContainsCorrectText(TEXT_WITH_UPPERCASE.getCorrectText());
+    }
+
+    @Test
+    public void checkTextForDigits() {
+        SpellerDto[][] spellerDto = new RestSpellerService().getCheckTextsResult(TEXT_WITH_DIGITS);
+        SpellerDto[] errorDto = Arrays.stream(spellerDto).flatMap(Arrays::stream).toArray(SpellerDto[]::new);
+        new RestSpellerAssertions(errorDto).verifyBodyHasErrorCode(1);
+    }
 }
