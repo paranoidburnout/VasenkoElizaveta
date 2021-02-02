@@ -1,19 +1,17 @@
 package hw8.service;
 
 import hw8.dto.SpellerDto;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertEquals;
 
+@AllArgsConstructor
 public class RestSpellerAssertions {
 
     private final SpellerDto[] spellerResponse;
-
-    public RestSpellerAssertions(SpellerDto[] spellerResponse) {
-        this.spellerResponse = spellerResponse;
-    }
 
     public RestSpellerAssertions verifyBodyHasErrorCode(Integer errorCode) {
         assertThat(spellerResponse[0]).extracting("code").isSameAs(errorCode);
