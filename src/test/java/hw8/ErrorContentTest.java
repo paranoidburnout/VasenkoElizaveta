@@ -7,8 +7,6 @@ import hw8.service.RestSpellerService;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-
 import static hw8.TestData.*;
 import static java.util.Arrays.asList;
 
@@ -48,7 +46,7 @@ public class ErrorContentTest {
 
     public void checkText(ParametersDto String, Integer error) {
         SpellerDto[][] spellerDto = new RestSpellerService().getCheckTextsResult(String);
-        SpellerDto[] errorDto = Arrays.stream(spellerDto).flatMap(Arrays::stream).toArray(SpellerDto[]::new);
+        SpellerDto[] errorDto = new RestSpellerService().parseData(spellerDto);
         new RestSpellerAssertions(errorDto)
                 .verifyBodyHasErrorCode(error)
                 .checkResponseContainsCorrectText(String.getCorrectText());
